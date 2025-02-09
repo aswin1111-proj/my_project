@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Card, CardContent, Typography } from '@mui/material';
 
 const Login = ({ setToken, setLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    document.title = "ABC Logistics - Login"; // Update browser tab title
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,26 +40,55 @@ const Login = ({ setToken, setLoggedIn }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" variant="contained" color="primary" fullWidth>Login</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div style={{ 
+      display: "flex", 
+      flexDirection: "column", 
+      alignItems: "center", 
+      justifyContent: "center", 
+      height: "100vh",
+      backgroundColor: "#f4f4f4"
+    }}>
+      <Typography variant="h4" style={{ marginBottom: "20px" }}>
+        ABC LOGISTICS
+      </Typography>
+      <Card style={{ width: "300px", padding: "20px", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}>
+        <CardContent>
+          <Typography variant="h5" align="center" gutterBottom>
+            Login
+          </Typography>
+          <form onSubmit={handleLogin}>
+            <TextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary" 
+              fullWidth
+              style={{ marginTop: "10px" }}
+            >
+              Login
+            </Button>
+          </form>
+          {error && <Typography color="error" style={{ marginTop: "10px" }}>{error}</Typography>}
+        </CardContent>
+      </Card>
     </div>
   );
 };
