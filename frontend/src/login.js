@@ -24,7 +24,14 @@ const Login = ({ setToken, setLoggedIn }) => {
       setLoggedIn(true);
       setError('');
     } catch (error) {
-      setError('Invalid username or password');
+      // Handle different types of errors
+      if (!error.response) {
+        setError("Unable to connect to the server. Please try again later.");
+      } else if (error.response.status === 401) {
+        setError("Invalid username or password.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
