@@ -36,13 +36,18 @@ const ShipmentStatus = ({ token, setLoggedIn }) => {
         <p>No shipments found</p>
       ) : (
         <ul>
-          {shipments.map((shipment) => (
+          {shipments.map((shipment) => {
+            // Format the estimated delivery date
+            const formattedDate = new Date(shipment.estimated_delivery_date).toLocaleDateString('en-GB');
+
+            return (
             <li key={shipment.id}>
               <p>Tracking Number: {shipment.tracking_number}</p>
               <p>Status: {shipment.status}</p>
-              <p>Estimated Delivery Date: {shipment.estimated_delivery_date}</p>
+              <p>Estimated Delivery Date: {formattedDate}</p>
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </div>

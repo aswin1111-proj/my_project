@@ -28,7 +28,6 @@ db.connect((err) => {
 // Login Route
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log(`Attempting login with username: ${username}, password: ${password}`);
 
   // Validate input
   if (!username || !password) {
